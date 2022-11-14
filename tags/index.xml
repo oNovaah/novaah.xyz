@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on novaah.xyz</title>
-        <link>http://aaronwasserman.com/novaah.xyz/tags/</link>
+        <link>novaah.xyz/tags/</link>
         <description>Recent content in Tags on novaah.xyz</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://aaronwasserman.com/novaah.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="novaah.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>FTP</title>
-        <link>http://aaronwasserman.com/novaah.xyz/tags/ftp/</link>
+        <link>novaah.xyz/tags/ftp/</link>
         <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://aaronwasserman.com/novaah.xyz/tags/ftp/</guid>
+        <guid>novaah.xyz/tags/ftp/</guid>
         <description></description>
         </item>
         <item>
         <title>HackTheBox</title>
-        <link>http://aaronwasserman.com/novaah.xyz/tags/hackthebox/</link>
+        <link>novaah.xyz/tags/hackthebox/</link>
         <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://aaronwasserman.com/novaah.xyz/tags/hackthebox/</guid>
+        <guid>novaah.xyz/tags/hackthebox/</guid>
         <description></description>
         </item>
         <item>
         <title>Samba</title>
-        <link>http://aaronwasserman.com/novaah.xyz/tags/samba/</link>
+        <link>novaah.xyz/tags/samba/</link>
         <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>http://aaronwasserman.com/novaah.xyz/tags/samba/</guid>
+        <guid>novaah.xyz/tags/samba/</guid>
         <description></description>
         </item>
         
