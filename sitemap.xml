@@ -2,45 +2,45 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://novaah.xyz/</loc>
+    <loc>https://novaah.xyz/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/categories/</loc>
+    <loc>https://novaah.xyz/categories/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/tags/ftp/</loc>
+    <loc>https://novaah.xyz/tags/ftp/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/tags/hackthebox/</loc>
+    <loc>https://novaah.xyz/tags/hackthebox/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/categories/hackthebox/</loc>
+    <loc>https://novaah.xyz/categories/hackthebox/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</loc>
+    <loc>https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/categories/oscp-prep/</loc>
+    <loc>https://novaah.xyz/categories/oscp-prep/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/post/</loc>
+    <loc>https://novaah.xyz/post/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/tags/samba/</loc>
+    <loc>https://novaah.xyz/tags/samba/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/tags/</loc>
+    <loc>https://novaah.xyz/tags/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/categories/walkthroughs/</loc>
+    <loc>https://novaah.xyz/categories/walkthroughs/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/archives/</loc>
+    <loc>https://novaah.xyz/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/page/</loc>
+    <loc>https://novaah.xyz/page/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://novaah.xyz/search/</loc>
+    <loc>https://novaah.xyz/search/</loc>
   </url>
 </urlset>
