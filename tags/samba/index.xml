@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Samba on novaah.xyz</title>
-        <link>novaah.xyz/tags/samba/</link>
+        <link>http://novaah.xyz/tags/samba/</link>
         <description>Recent content in Samba on novaah.xyz</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="novaah.xyz/tags/samba/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://novaah.xyz/tags/samba/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>HackTheBox Lame Walkthrough (w/o Metasploit)</title>
-        <link>novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</link>
+        <link>http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</link>
         <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</guid>
-        <description>&lt;img src="/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame.png" alt="Featured image of post HackTheBox Lame Walkthrough (w/o Metasploit)" /&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+        <guid>http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</guid>
+        <description>&lt;img src="http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame.png" alt="Featured image of post HackTheBox Lame Walkthrough (w/o Metasploit)" /&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Hi! Welcome to my first post on the blog and first HackTheBox walkthrough. I&amp;rsquo;m currently preparing to take the OSCP certification exam and decided to tackle TJ_Null&amp;rsquo;s OSCP-like VMs list! Lame is the first Linux box on the list.
-&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj.png&#34;
+&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj.png&#34;
 	width=&#34;1726&#34;
 	height=&#34;1490&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;TJ_Null&amp;rsquo;s HackTheBox OSCP-like VMs list&#34;
@@ -40,10 +40,10 @@ Since I am doing this in preparation for the OSCP exam where Metasploit usage is
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -Pn 10.10.10.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap.png&#34;
 	width=&#34;516&#34;
 	height=&#34;220&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Initial nmap scan&#34;
@@ -64,10 +64,10 @@ From this initial scan, we can see FTP, SSH, and SMB services running.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -Pn -A -v -p- 10.10.10.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap.png&#34;
 	width=&#34;620&#34;
 	height=&#34;629&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Intensive nmap scan&#34;
@@ -92,10 +92,10 @@ This scan actually ran pretty quickly before I had time to jump into early enume
 &lt;/div&gt;&lt;p&gt;Sifting through the results, nothing looks interesting so we can move past SSH for now.&lt;/p&gt;
 &lt;h3 id=&#34;ftp&#34;&gt;FTP&lt;/h3&gt;
 &lt;p&gt;Next, we will take a look at FTP.  We saw in our intensive nmap scan that anonymous login was allowed. Let&amp;rsquo;s try that.
-&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp.png&#34;
+&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp.png&#34;
 	width=&#34;386&#34;
 	height=&#34;247&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Anonymous FTP login&#34;
@@ -115,10 +115,10 @@ This didn&amp;rsquo;t yield anything. Let&amp;rsquo;s check searchsploit for the
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;searchsploit vsftpd 2.3.4
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss.png&#34;
 	width=&#34;654&#34;
 	height=&#34;161&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;vsftpd 2.3.4 searchsploit results&#34;
@@ -140,10 +140,10 @@ This looks promising! An RCE with an accompanying Metasploit module. We will add
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;smbmap -H 10.10.10.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap.png&#34;
 	width=&#34;1025&#34;
 	height=&#34;168&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;smbmap -H results&#34;
@@ -163,10 +163,10 @@ We have access to the /tmp share. Lets try to see what is in it!&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;smbclient -N //10.10.10.3/tmp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb.png&#34;
 	width=&#34;609&#34;
 	height=&#34;232&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Connecting to /tmp share&#34;
@@ -187,10 +187,10 @@ None of this looks too interesting.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;searchsploit samba 3.0.20
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss.png&#34;
 	width=&#34;996&#34;
 	height=&#34;213&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Samba 3.0.20 searchsploit results&#34;
@@ -212,10 +212,10 @@ The seccond listing looks interesting. The version number fits and the entry lis
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;searchsploit distccd 4.2.4
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v.png&#34;
 	width=&#34;250&#34;
 	height=&#34;91&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;DistCC searchsploit results&#34;
@@ -235,10 +235,10 @@ Checking with the version number we found did not return any results, however, c
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;searchsploit distcc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss.png&#34;
 	width=&#34;999&#34;
 	height=&#34;149&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;DistCC searchsploit general results&#34;
@@ -356,10 +356,10 @@ Not only did it find an exploit, it found an RCE! Since the version number isn&a
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 49757.py 10.10.10.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit.png&#34;
 	width=&#34;265&#34;
 	height=&#34;56&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Python FTP exploit&#34;
@@ -470,10 +470,10 @@ When we run the exploit, it hangs.  Let&amp;rsquo;s add print statements to see 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python3 49757.py 10.10.10.3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg.png&#34;
 	width=&#34;340&#34;
 	height=&#34;90&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Pyhton FTP exploit w/ debug prints&#34;
@@ -731,10 +731,10 @@ Now we can see that it is hanging when checking for the backdoor port. It looks 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Now that we have our payload and an active listener, let&amp;rsquo;s try to login with our malicious username payload:
-&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit.png&#34;
+&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit.png&#34;
 	width=&#34;467&#34;
 	height=&#34;123&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Samba exploit&#34;
@@ -746,10 +746,10 @@ Now we can see that it is hanging when checking for the backdoor port. It looks 
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;Now let&amp;rsquo;s go back and check our listener.&lt;br&gt;
-&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell.png&#34;
+&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell.png&#34;
 	width=&#34;470&#34;
 	height=&#34;98&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Reverse shell&#34;
@@ -769,10 +769,10 @@ We got a shell! Let&amp;rsquo;s see who we are&amp;hellip;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;whoami
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root.png&#34;
 	width=&#34;465&#34;
 	height=&#34;115&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Root!&#34;
@@ -800,10 +800,10 @@ WOW! We are already in a root shell.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users.png&#34;
 	width=&#34;74&#34;
 	height=&#34;98&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Users&#34;
@@ -825,10 +825,10 @@ Makis looks the most out of place. Let&amp;rsquo;s check their home directory&am
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ls
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis.png&#34;
 	width=&#34;78&#34;
 	height=&#34;50&#34;
-	srcset=&#34;novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_480x0_resize_box_3.png 480w, novaah.xyz/novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_480x0_resize_box_3.png 480w, http://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Makis user&#34;
