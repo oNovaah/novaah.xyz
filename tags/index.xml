@@ -6,20 +6,44 @@
         <description>Recent content in Tags on novaah.xyz</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 13 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://novaah.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>FTP</title>
-        <link>https://novaah.xyz/tags/ftp/</link>
-        <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+        <lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://novaah.xyz/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>CVE-2021-4034</title>
+        <link>https://novaah.xyz/tags/cve-2021-4034/</link>
+        <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://novaah.xyz/tags/ftp/</guid>
+        <guid>https://novaah.xyz/tags/cve-2021-4034/</guid>
         <description></description>
         </item>
         <item>
         <title>HackTheBox</title>
         <link>https://novaah.xyz/tags/hackthebox/</link>
-        <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
         
         <guid>https://novaah.xyz/tags/hackthebox/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>RFI</title>
+        <link>https://novaah.xyz/tags/rfi/</link>
+        <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://novaah.xyz/tags/rfi/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>WordPress</title>
+        <link>https://novaah.xyz/tags/wordpress/</link>
+        <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://novaah.xyz/tags/wordpress/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>FTP</title>
+        <link>https://novaah.xyz/tags/ftp/</link>
+        <pubDate>Sun, 13 Nov 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://novaah.xyz/tags/ftp/</guid>
         <description></description>
         </item>
         <item>

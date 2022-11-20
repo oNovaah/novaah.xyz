@@ -3,36 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://novaah.xyz/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://novaah.xyz/categories/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://novaah.xyz/tags/ftp/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
+    <loc>https://novaah.xyz/tags/cve-2021-4034/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://novaah.xyz/tags/hackthebox/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://novaah.xyz/categories/hackthebox/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/p/hackthebox-tartarsauce-walkthrough-w/o-metasploit/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/categories/oscp-prep/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/post/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/tags/rfi/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/tags/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/categories/walkthroughs/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/tags/wordpress/</loc>
+    <lastmod>2022-11-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://novaah.xyz/tags/ftp/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://novaah.xyz/p/hackthebox-lame-walkthrough-w/o-metasploit/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://novaah.xyz/categories/oscp-prep/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://novaah.xyz/post/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://novaah.xyz/tags/samba/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://novaah.xyz/tags/</loc>
-    <lastmod>2022-11-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://novaah.xyz/categories/walkthroughs/</loc>
     <lastmod>2022-11-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://novaah.xyz/archives/</loc>
