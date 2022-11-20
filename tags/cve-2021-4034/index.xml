@@ -1035,8 +1035,7 @@ It looks like the machine is vulnerable to Polkit pkexec local privelege escalat
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./exp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Unfortunately, I ran into a lot of issues here with library dependencies and linking. Time to check the LinPEAS output again for other privesc vectors.&lt;/p&gt;
-&lt;p&gt;I remember from the LinPEAS scan that we have Python, however. I found a Python exploit for the same CVE at &lt;a class=&#34;link&#34; href=&#34;https://github.com/joeammond/CVE-2021-4034&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/div&gt;&lt;p&gt;Unfortunately, I ran into a lot of issues here with library dependencies and linking. I remember from the LinPEAS scan that we have Python, however. I found a Python exploit for the same CVE at &lt;a class=&#34;link&#34; href=&#34;https://github.com/joeammond/CVE-2021-4034&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/joeammond/CVE-2021-4034&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It defaults to using an x64 payload so let&amp;rsquo;s modify it.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

@@ -1424,8 +1424,7 @@ It looks like the machine is vulnerable to Polkit pkexec local privelege escalat
 </span></span><span class="line"><span class="cl">./exp
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>Unfortunately, I ran into a lot of issues here with library dependencies and linking. Time to check the LinPEAS output again for other privesc vectors.</p>
-<p>I remember from the LinPEAS scan that we have Python, however. I found a Python exploit for the same CVE at <a class="link" href="https://github.com/joeammond/CVE-2021-4034"  target="_blank" rel="noopener"
+</div><p>Unfortunately, I ran into a lot of issues here with library dependencies and linking. I remember from the LinPEAS scan that we have Python, however. I found a Python exploit for the same CVE at <a class="link" href="https://github.com/joeammond/CVE-2021-4034"  target="_blank" rel="noopener"
     >https://github.com/joeammond/CVE-2021-4034</a>.</p>
 <p>It defaults to using an x64 payload so let&rsquo;s modify it.</p>
 <div class="highlight"><div class="chroma">
