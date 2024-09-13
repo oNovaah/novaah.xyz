@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tailwind CSS on Novaah&#39;s Security Blog</title>
+    <link>http://localhost:1313/tags/tailwind-css/</link>
+    <description>Recent content in Tailwind CSS on Novaah&#39;s Security Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://localhost:1313/tags/tailwind-css/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personal Curriculum Vitae and Portfolio Website with Hugo and Tailwind CSS</title>
+      <link>http://localhost:1313/posts/personal-curriculum-vitae-and-portfolio-website-with-hugo-and-tailwind-css/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/personal-curriculum-vitae-and-portfolio-website-with-hugo-and-tailwind-css/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

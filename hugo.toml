@@ -1,0 +1,70 @@
+baseURL = "https://novaah.xyz.github.io"
+theme = "risotto"
+title = "Novaah's Security Blog"
+author = "Aaron Wasserman (novaah)"
+languageCode = "en-us"
+DefaultContentLanguage = "en-us"
+sectionPagesMenu = "main"
+
+[params]
+
+[params.theme]
+palette = "base16-dark"
+
+# Sidebar: about/bio
+[params.about]
+title = "Novaah's Security Blog"
+description = "Documenting my endeavors in IoT and hardware hacking."
+# unicode/emoji logo:
+#logo = ""
+# or use an image:
+#logo_image = "images/rice.svg"
+
+# Sidebar: social links
+# Available icon sets:
+# * FontAwesome 6 <https://fontawesome.com/> ('fa-brands', 'fa-normal', or 'fa-solid' for brands)
+
+[[params.socialLinks]]
+icon = "fa-solid fa-user"
+title = "About Me"
+url = "https://aaronwasserman.com"
+
+[[params.socialLinks]]
+icon = "fa-brands fa-twitter"
+title = "Twitter"
+url = "https://x.com/novaah_sec"
+
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+
+[markup]
+
+  # Table of contents
+  # Add toc = true to content front matter to enable
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
+    ordered    = true
+
+[privacy]
+
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+
+  [privacy.twitter]
+    disabled = false
+    enableDNT = true
+    simple = true
+
+  [privacy.instagram]
+    disabled = false
+    simple = true
+
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
